@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-
+import os
 app = Flask(__name__)
 
 def extract_keywords_tfidf(query, top_n=5):
@@ -34,4 +34,5 @@ def extract():
     return jsonify({'keywords': keywords})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
